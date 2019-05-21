@@ -8,9 +8,10 @@ import (
 	"net/http"
 	"net/textproto"
 	"strings"
+	"os"
 )
 
-const (
+var (
 	Version  = "1.0"
 	HttpAddr = ":50003"
 	DestAddr = "127.0.0.1:50001"
@@ -66,6 +67,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	arg := os.Args
+	
+	if len(arg) < 3 {
+		log.Printf("Usage:\n %v httpaddr destaddr", arg[0])
+		return
+	}
+
+	HttpAddr = arg[1]
+	DestAddr = arg[2]
+
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("http2tcp version: %s\n", Version)
 	log.Printf("relay http(%s) -> tcp(%s)\n", HttpAddr, DestAddr)
