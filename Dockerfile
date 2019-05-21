@@ -1,7 +1,7 @@
 FROM golang:1.12.5-alpine3.9
 
 RUN set -ex; \
-    echo "https://mirrors.aliyun.com/alpine/v3.7/main/" > /etc/apk/repositories; \
+    echo "https://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories; \
     apk update; \
     apk add --no-cache openssl bash apache2-utils; \
     mkdir -p /tmp/http2tcp;
