@@ -7,13 +7,14 @@ RUN set -ex; \
     mkdir -p /tmp/http2tcp;
 
 
-COPY ./latest.tar.gz /tmp/http2tcp
+COPY . /tmp/http2tcp
 
 RUN set -ex; \
     cd /tmp/http2tcp; \
-    tar -xvzf latest.tar.gz; \
     go build -o http2tcp main.go; \
-    mv http2tcp /usr/local/bin;
+    mv http2tcp /usr/local/bin; \
+    cd /tmp; \
+    rm -rf /tmp/http2tcp
 
 # 50003 http 接口, 转50001的tcp line接口
 # EXPOSE 50003
