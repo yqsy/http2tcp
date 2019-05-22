@@ -5,14 +5,14 @@ RUN set -ex; \
     apk update; \
     apk add --no-cache bash apache2-utils;
 
-COPY . /tmp/http2tcp
+COPY . /env/http2tcp
 
 RUN set -ex; \
-    cd /tmp/http2tcp; \
+    cd /env/http2tcp; \
     go build -o http2tcp main.go; \
     mv http2tcp /usr/local/bin; \
-    cd /tmp; \
-    rm -rf /tmp/http2tcp
+    cd /env; \
+    rm -rf /env/http2tcp
 
 # 50003 http 接口, 转50001的tcp line接口
 EXPOSE 50003
